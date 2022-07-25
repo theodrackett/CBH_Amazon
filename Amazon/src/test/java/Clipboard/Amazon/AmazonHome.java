@@ -18,7 +18,6 @@ public class AmazonHome extends InitialSetup {
 		prop.load(fis);
 		
 		String amzUrl = prop.getProperty("amazon_url");
-		System.out.println(amzUrl);
 		driver = initDriver();
 		driver.get(amzUrl);
 		
@@ -26,7 +25,28 @@ public class AmazonHome extends InitialSetup {
 		LandingPage lp = new LandingPage(driver);
 		lp.burgerMenu().click();
 		
+		//Go to electronics department
+		ShopByDept sbd = new ShopByDept(driver);
+		sbd.shopByDept().click();
 		
+		//Go to the television section
+		TVPage tv = new TVPage(driver);
+		tv.tvPage().click();
+		
+		//Filter down to just Samsung TVs
+		SamsungTVs samsungs = new SamsungTVs(driver);
+		samsungs.samsungtvs().click();
+		
+		//Open the sort menu
+		SortedSamsungTVs sstvs = new SortedSamsungTVs(driver);
+		sstvs.openSortMenu().click();
+		
+		//Sort TVs High to Low
+		sstvs.sortHighLow().click();
+		
+		//Grab second most expensive TV
+		SecondMostExpensive sme = new SecondMostExpensive(driver);
+		sme.secondMostExpTV().click();
 		
 	}
 
