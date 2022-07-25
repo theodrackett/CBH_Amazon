@@ -11,6 +11,8 @@ public class AmazonHome extends InitialSetup {
 	@Test
 	public void startingPage() throws IOException {
 		
+		//Handles all operations on the Home Page
+		
 		Properties prop = new Properties();
 		FileInputStream fis = new FileInputStream("/Users/owner/git/repository/CBH_Amazon/Amazon/src/main/java/resources/data.properties");
 		prop.load(fis);
@@ -19,6 +21,12 @@ public class AmazonHome extends InitialSetup {
 		System.out.println(amzUrl);
 		driver = initDriver();
 		driver.get(amzUrl);
+		
+		//Click on the hamburger menu
+		LandingPage lp = new LandingPage(driver);
+		lp.burgerMenu().click();
+		
+		
 		
 	}
 
