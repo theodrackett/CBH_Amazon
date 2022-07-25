@@ -15,8 +15,10 @@ public class InitialSetup {
 	
 	public WebDriver initDriver() throws IOException {
 		
+		// Determine which browser to use and configure driver accordingly
+		
 		Properties prop = new Properties();
-		FileInputStream fis = new FileInputStream("/Users/owner/eclipse-workspace/Amazon/src/main/java/Clipboard/Amazon/data.properties");
+		FileInputStream fis = new FileInputStream("/Users/owner/git/repository/CBH_Amazon/Amazon/src/main/java/resources/data.properties");
 		prop.load(fis);
 		
 		String browserName = prop.getProperty("browser");
@@ -31,6 +33,7 @@ public class InitialSetup {
 		}
 		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
 		return driver;
 		
 	}
