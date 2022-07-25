@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AmazonHome extends InitialSetup {
@@ -44,10 +45,22 @@ public class AmazonHome extends InitialSetup {
 		//Sort TVs High to Low
 		sstvs.sortHighLow().click();
 		
+		//Get current window handle
+		String currentWindow = driver.getWindowHandle();
+		
 		//Grab second most expensive TV
 		SecondMostExpensive sme = new SecondMostExpensive(driver);
 		sme.secondMostExpTV().click();
 		
+		//Switch to new window
+		for(String newWindowHandle : driver.getWindowHandles()) {
+		    driver.switchTo().window(newWindowHandle);
+		}
+		
+		//Assertion for 'About this item'
+		AboutPage ap = new AboutPage(driver);
+		ap.aboutText().getText();
+		Assert.assertEquals(ap.aboutText().getText(), "About this item");
 	}
 
 }
