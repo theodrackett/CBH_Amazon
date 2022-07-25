@@ -1,16 +1,16 @@
-package Clipboard.Amazon;
+package pageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LandingPage {
+public class HamburgerMenu {
 	
 	public WebDriver driver;
 	
 	By hamburgerMenu = By.id("nav-hamburger-menu");
 	
-	public LandingPage(WebDriver driver) {
+	public HamburgerMenu(WebDriver driver) {
 		this.driver = driver;
 	}
 	

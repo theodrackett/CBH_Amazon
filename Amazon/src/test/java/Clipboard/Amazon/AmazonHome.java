@@ -1,29 +1,39 @@
 package Clipboard.Amazon;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-
-import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
+import java.io.IOException;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import pageObjects.AboutPage;
+import pageObjects.HamburgerMenu;
+import pageObjects.SamsungTVs;
+import pageObjects.SecondMostExpensive;
+import pageObjects.ShopByDept;
+import pageObjects.SortedSamsungTVs;
+import pageObjects.TVPage;
+import resources.InitialSetup;
 
 public class AmazonHome extends InitialSetup {
 	
-	@Test
-	public void startingPage() throws IOException {
-		
-		//Handles all operations on the Home Page
-		
-		Properties prop = new Properties();
-		FileInputStream fis = new FileInputStream("/Users/owner/git/repository/CBH_Amazon/Amazon/src/main/java/resources/data.properties");
-		prop.load(fis);
-		
-		String amzUrl = prop.getProperty("amazon_url");
+	@BeforeTest
+	public void startup() throws IOException {
+
+		//Initialize driver object and get url
 		driver = initDriver();
-		driver.get(amzUrl);
+		driver.get(prop.getProperty("amazon_url"));
 		
+	}
+	
+	@Test
+	public void startingPage() {
+				
 		//Click on the hamburger menu
-		LandingPage lp = new LandingPage(driver);
+		HamburgerMenu lp = new HamburgerMenu(driver);
 		lp.burgerMenu().click();
 		
 		//Go to electronics department
@@ -60,7 +70,13 @@ public class AmazonHome extends InitialSetup {
 		//Assertion for 'About this item'
 		AboutPage ap = new AboutPage(driver);
 		ap.aboutText().getText();
-		Assert.assertEquals(ap.aboutText().getText(), "About this item");
+		AssertJUnit.assertEquals(ap.aboutText().getText(), "About this item");
+	}
+	
+	@AfterMethod
+	@AfterTest
+	public void tearDown() {
+		driver.quit();
 	}
 
 }
